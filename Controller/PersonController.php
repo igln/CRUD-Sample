@@ -20,7 +20,8 @@ class PersonController
                 $this->readAction($request);
                 break;
             case Actions::READ_ALL:
-                $this->readAction($request);
+                $this->readAllAction($request);
+                break;
             case Actions::DELETE:
                 $this->deleteAction($request);
                 break;
@@ -40,6 +41,10 @@ class PersonController
     }
 
     public function readAction($request)
+    {
+
+    }
+    public function readAllAction($request)
     {
 
     }
