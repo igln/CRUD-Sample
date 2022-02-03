@@ -2,15 +2,35 @@
 
 namespace CRUD\Helper;
 
+use mysqli;
+
 class DBConnector
 {
 
     /** @var mixed $db */
     private $db;
 
+    /** @var mixed $host */
+    private $host;
+
+
+    /** @var mixed $host */
+    private $port;
+
+    /** @var mixed $username */
+    private $username;
+
+    /** @var mixed $password */
+    private $password;
+
+    /** @var mixed $dbConnection */
+    private $dbConnection;
+
     public function __construct()
     {
-
+        $this->db = "CRUD";
+        $this->username = "username";
+        $this->password = "password";
     }
 
     /**
@@ -19,16 +39,19 @@ class DBConnector
      */
     public function connect() : void
     {
+        $this->dbConnection = new mysqli($this->host, $this->username, $this->password,$this->db);
 
+        if ($this->dbConnection->connect_error) {
+            $this->exceptionHandler("Connection failed: " . $this->dbConnection->connect_error);
+        }
     }
 
     /**
      * @param string $query
-     * @return bool
      */
-    public function execQuery(string $query) : bool
+    public function execQuery(string $query)
     {
-        return true;
+        return $this->dbConnection->query($query);
     }
 
     /**
@@ -38,6 +61,6 @@ class DBConnector
      */
     private function exceptionHandler(string $message): void
     {
-
+        throw new \Exception($message);
     }
 }

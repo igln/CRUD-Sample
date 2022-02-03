@@ -5,4 +5,4 @@ use CRUD\Controller\PersonController;
 include ("loader.php");
 
 $controller = new PersonController();
-$controller->switcher($_SERVER['REQUEST_URI'],$_REQUEST);
+$controller->switcher(explode("?",$_SERVER['REQUEST_URI'])[0],$_REQUEST);
